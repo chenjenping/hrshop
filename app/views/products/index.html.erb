@@ -1,0 +1,7 @@
+<h1>商品</h1>
+
+<%= link_to '新增商品', new_product_path, { class: 'button form_button' } %>
+<h2>上架中</h2>
+<%= render 'list', products: @products %>
+<h2>已下架</h2>
+<%= render 'list', products: @off_shelf_products %>

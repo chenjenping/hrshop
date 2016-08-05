@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>hrshop</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+<% if notice %>
+  <div id="notice" style="z-index: 400;">
+    <p class="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<% if alert %>
+  <div id="notice" style="z-index: 400;">
+    <p class="alert"><%= alert %></p>
+  </div>
+<% end %>
+
+  <div class="content">
+    <%= yield %>
+  </div>
+</div>
+</body>
+</html>

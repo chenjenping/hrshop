@@ -1,0 +1,39 @@
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>名稱</th>
+      <th>價格</th>
+      <th>介紹</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% products.each do |product| %>
+    <tr>
+      <td>
+      <% if product.is_on_shelf? %>
+        <%= link_to '下架', product_path(product),
+                           method: :delete,
+                           data: { confirm: '確定下架？' } %>
+      <% else %>
+        <%= link_to '上架', on_shelf_product_path(product),
+                           method: :put,
+                           data: { confirm: '確定上架？' } %>
+      <% end %>
+        <%= link_to edit_product_path(product) do %>
+          編輯
+        <% end %>
+      </td>
+      <td>
+        <%= product.name %>
+      </td>
+      <td>
+        <%= product.price %>
+      </td>
+      <td>
+        <%= product.description %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
