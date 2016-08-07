@@ -1,0 +1,39 @@
+<h1>訂單</h1>
+
+<%= link_to '新增訂單', new_order_path, { class: 'button form_button' } %>
+<table>
+  <thead>
+    <tr>
+      <th>客戶姓名</th>
+      <th>電話</th>
+      <th>email</th>
+      <th>地址</th>
+      <th>內容</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @orders.each do |order| %>
+    <tr>
+      <td>
+        <%= order.purchaser %>
+      </td>
+      <td>
+        <%= order.phone %>
+      </td>
+      <td>
+        <%= order.email %>
+      </td>
+      <td>
+        <%= order.address %>
+      </td>
+      <td>
+        <ul>
+        <% order.order_items.each do |item| %>
+          <li><%= item.product.name %> x <%= item.amount %></li>
+        <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

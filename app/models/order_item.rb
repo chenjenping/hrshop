@@ -1,4 +1,4 @@
 class OrderItem < ActiveRecord::Base
 	belongs_to :order
-	has_many :products
+	belongs_to :product
 end

@@ -1,4 +1,10 @@
 zh-TW:
+  activerecord:
+    attributes:
+      order:
+        purchaser: 客戶姓名
+        phone: 電話
+        address: 地址
   date:
     abbr_day_names:
     - 周日

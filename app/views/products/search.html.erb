@@ -1,0 +1,35 @@
+<h1>搜尋訂單商品</h1>
+<table>
+  <thead>
+    <tr>
+      <th>名稱</th>
+      <th>價格</th>
+      <th>介紹</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @products.each do |product| %>
+    <tr>
+      <td>
+        <%= product.name %>
+      </td>
+      <td>
+        <%= product.price %>
+      </td>
+      <td>
+        <%= product.description %>
+      </td>
+      <td>
+        <%= form_tag add_to_order_product_path(product) do %>
+          <div>
+            <%= label_tag :amount, '數量' %>
+            <%= text_field_tag :amount %>
+            <%= submit_tag '加入訂單' %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

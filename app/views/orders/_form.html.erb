@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-offset-4 col-md-4">
+    <%= link_to '回訂單列表', orders_path, :class => 'expanded' %>
+    <%= form_tag search_products_path do %>
+      <div>
+        <%= label_tag :q, '搜尋商品' %>
+        <%= text_field_tag :q %>
+        <%= submit_tag '搜尋' %>
+      </div>
+    <% end %>
+    <%= form_for @order, :url => @order.new_record? ? orders_path : order_path(@order), :html => { :id => 'new_order_form', :multipart => true } do |f| %>
+      <h4 class="text-center">
+        <%= action %>訂單
+      </h4>
+      <%= link_to '清空訂單商品', clear_cart_orders_path(),
+                                method: :post,
+                                data: { confirm: '確定清空？' } %>
+      <% if @items.count == 0 %>
+        <p>請在上方搜尋商品加入訂單</p>
+      <% end %>
+      <ul>
+      <% @items.each do |item| %>
+        <li><%= item['product'] %> x <%= item['amount'] %></li>
+      <% end %>
+      </ul>
+      <div>
+        <%= f.label :purchaser, '客戶姓名' %>
+        <%= f.text_field :purchaser %>
+      </div>
+      <div>
+        <%= f.label :phone, '電話' %>
+        <%= f.text_field :phone %>
+      </div>
+      <div>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </div>
+      <div>
+        <%= f.label :address, '地址' %>
+        <%= f.text_field :address %>
+      </div>
+      <p>
+        <%= f.submit action, :class => 'button expanded form_button' %>
+      </p>
+      <% if @order.errors.any? %>
+        <div id="error">
+          <h4>
+            <%#= pluralize(@order.errors.count, 'error') %>
+            請修正以下問題
+          </h4>
+          <ul>
+            <% @order.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

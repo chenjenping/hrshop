@@ -2,7 +2,14 @@ Rails.application.routes.draw do
   root 'products#index'
 
   resources :products do
+    post 'search', on: :collection
     put 'on_shelf', on: :member
+    post 'add_to_order', on: :member
+  end
+
+  resources :orders do
+    post 'search', on: :collection
+    post 'clear_cart', on: :collection
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

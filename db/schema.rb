@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 20160805050718) do
   end
 
   create_table "orders", force: true do |t|
-    t.string   "title"
-    t.integer  "theme"
-    t.string   "image"
-    t.string   "file"
+    t.string   "purchaser"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
