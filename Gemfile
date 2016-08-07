@@ -5,12 +5,9 @@ gem 'rails', '4.1.8'
 gem 'pg'
 # Use SCSS for stylesheets
 #gem 'sass-rails', '~> 4.0.3'
-gem 'foundation-rails'
+gem 'sass-rails', '~> 4.0.1'
 gem 'compass-rails', '~> 2.0.0'
 gem 'font-awesome-sass'
-gem 'sass-rails', '~> 4.0.1'
-gem 'momentjs-rails'
-gem 'fullcalendar-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -20,13 +17,6 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-gem 'jquery-ui-rails', '~> 5.0.3'
-group :development do
-	gem 'guard-livereload'
-  gem 'heroku_san'
-end
-
-
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -37,8 +27,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 # gem 'spring',        group: :development
-
-gem 'devise'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -57,3 +45,28 @@ gem 'eventmachine', '1.0.9'
 gem "paranoia", "~> 2.0"
 gem 'sunspot_rails'
 gem 'sunspot_solr'
+
+# group :development do
+  # gem 'guard-livereload'
+  # gem 'heroku_san'
+# end
+
+group :development, :test do
+  gem 'byebug'
+  gem 'rspec-rails', '~> 3.4'
+  gem 'factory_girl_rails', '~> 4.5'
+  gem 'capybara', '~> 2.5'
+end
+
+group :development do
+  gem 'web-console', '~> 2.0'
+  gem 'spring'
+end
+
+group :test do
+  gem 'guard-rspec'
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'database_cleaner', '~> 1.5'
+  gem 'faker', '~> 1.6.1'
+  gem 'simplecov', :require => false
+end

@@ -1,6 +1,10 @@
 zh-TW:
   activerecord:
     attributes:
+      product:
+        name: 名稱
+        price: 價格
+        description: 介紹
       order:
         purchaser: 客戶姓名
         phone: 電話

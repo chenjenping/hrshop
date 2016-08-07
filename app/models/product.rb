@@ -1,6 +1,8 @@
 class Product < ActiveRecord::Base
   acts_as_paranoid
 
+  validates_presence_of :name, :price, :description
+
   searchable do
     text :name, :description
   end
