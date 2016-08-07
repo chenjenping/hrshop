@@ -19,11 +19,11 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
+    @product = Product.with_deleted.find(params[:id])
   end
 
   def update
-    @product = Product.find(params[:id])
+    @product = Product.with_deleted.find(params[:id])
 
     if @product.update(product_params)
       redirect_to products_url

@@ -2,12 +2,22 @@ class PromotionsController < ApplicationController
   def new
     @product_id = params[:product_id]
     @promotion = Promotion.new
+    promotion = Promotion.where(product_id: @product_id).order(created_at: :desc).first
+    if promotion
+      @promotion.amount = promotion.amount
+      @promotion.discount = promotion.discount
+    end
   end
 
   def create
-    product = Product.find(params[:product_id])
+    product = Product.with_deleted.find(params[:product_id])
     @product_id = product.id
+    promotion = product.current_promotion
     @promotion = Promotion.new(promotion_params)
+    if promotion.amount == @promotion.amount && promotion.discount == @promotion.discount
+      redirect_to products_url and return
+    end
+
     product.promotions << @promotion
     if product.save
       redirect_to products_url
