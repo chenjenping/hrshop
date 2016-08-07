@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     post 'search', on: :collection
     put 'on_shelf', on: :member
     post 'add_to_order', on: :member
+    resources :promotions, only: [:new, :create]
   end
 
   resources :orders do

@@ -5,6 +5,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string :phone
       t.string :email
       t.string :address
+      t.integer :consumption
 
       t.timestamps
     end

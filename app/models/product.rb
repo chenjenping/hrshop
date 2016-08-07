@@ -5,9 +5,14 @@ class Product < ActiveRecord::Base
     text :name, :description
   end
 
-  belongs_to :order_item
+  has_many :order_items
+  has_many :promotions, -> { order 'created_at desc' }
 
   def is_on_shelf?
     return ! deleted?
+  end
+
+  def current_promotion
+    return promotions.first
   end
 end

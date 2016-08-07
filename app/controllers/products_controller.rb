@@ -56,7 +56,7 @@ class ProductsController < ApplicationController
   def add_to_order
     product = Product.find(params[:id])
     if product && params[:amount].to_i > 0 && ! is_in_cart?(params[:id])
-      item = { :product_id => params[:id], :product => Product.find(params[:id]).name, :amount => params[:amount] }
+      item = { :product_id => product.id, :product => product.name, :amount => params[:amount] }
       session[:items] ||= []
       session[:items] << item
     end

@@ -16,9 +16,18 @@ class OrdersController < ApplicationController
       render 'new' and return
     end
 
+    consumption = 0
     @items.each do |item|
       @order.order_items << OrderItem.new({ :product_id => item['product_id'], :amount => item['amount'] })
+      product = Product.find(item['product_id'])
+      promotion = product.current_promotion
+      price = product.price
+      if promotion && item['amount'].to_i >= promotion.amount
+        price -= promotion.discount.to_i
+      end
+      consumption += price * item['amount'].to_i
     end
+    @order.consumption = consumption
 
     if @order.save
       session[:items] = []

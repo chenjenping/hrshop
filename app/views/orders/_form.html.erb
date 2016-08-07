@@ -8,7 +8,7 @@
         <%= submit_tag '搜尋' %>
       </div>
     <% end %>
-    <%= form_for @order, :url => @order.new_record? ? orders_path : order_path(@order), :html => { :id => 'new_order_form', :multipart => true } do |f| %>
+    <%= form_for @order, :url => @order.new_record? ? orders_path : order_path(@order), :html => { :id => 'new_order_form' } do |f| %>
       <h4 class="text-center">
         <%= action %>訂單
       </h4>
@@ -42,13 +42,15 @@
       <p>
         <%= f.submit action, :class => 'button expanded form_button' %>
       </p>
-      <% if @order.errors.any? %>
+      <% if @order.errors.any? || @items.count == 0 %>
         <div id="error">
           <h4>
-            <%#= pluralize(@order.errors.count, 'error') %>
-            請修正以下問題
+            請修正這些欄位
           </h4>
           <ul>
+            <% if @items.count == 0 %>
+              <li>請搜尋商品加入訂單</li>
+            <% end %>
             <% @order.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>
             <% end %>

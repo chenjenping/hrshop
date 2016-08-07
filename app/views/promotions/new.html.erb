@@ -1,0 +1,20 @@
+<%= form_for @promotion, :url => product_promotions_path(@product_id), :html => { :id => 'new_promotion_form' } do |f| %>
+  <div>
+    買 <%= f.text_field :amount %> 件以上每件可折扣 <%= f.text_field :discount %> 元
+  </div>
+  <div>
+    <%= f.submit '新增', :class => 'button expanded form_button' %>
+  </div>
+  <% if @promotion.errors.any? %>
+    <div id="error">
+      <h4>
+        請修正這些欄位
+      </h4>
+      <ul>
+        <% @promotion.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

@@ -5,6 +5,7 @@
       <th>名稱</th>
       <th>價格</th>
       <th>介紹</th>
+      <th>優惠</th>
     </tr>
   </thead>
   <tbody>
@@ -32,6 +33,14 @@
       </td>
       <td>
         <%= product.description %>
+      </td>
+      <td>
+      <% if product.current_promotion %>
+        <p>
+          買 <%= product.current_promotion.amount %> 件以上每件可折扣 <%= product.current_promotion.discount %> 元
+        </p>
+      <% end %>
+        <%= link_to '調整優惠', new_product_promotion_path(product) %>
       </td>
     </tr>
   <% end %>
