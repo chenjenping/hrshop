@@ -1,6 +1,26 @@
+<% if @q %>
+<h1>搜尋訂單包含 "<%= @q %>"</h1>
+<% else %>
 <h1>訂單</h1>
 
 <%= link_to '新增訂單', new_order_path, class: 'button is-success' %>
+<% end %>
+
+<div id="order_search" class="columns">
+  <div class="column is-one-third">
+    <%= form_tag search_orders_path do %>
+      <div class="control has-addons">
+        <%= text_field_tag :q, nil, class: 'input is-expanded' %>
+        <button class="button is-success">
+          <span class="icon">
+            <i class="fa fa-search"></i>
+          </span>
+        </button>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <table id="order_table" class="table is-bordered">
   <thead>
     <tr>

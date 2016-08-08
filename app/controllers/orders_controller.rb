@@ -42,6 +42,15 @@ class OrdersController < ApplicationController
     redirect_to new_order_url
   end
 
+  def search
+    @q = params[:q]
+    search = Order.search do
+      fulltext params[:q]
+    end
+    @orders = search.results
+    render 'index'
+  end
+
 private
 
   def set_active_tab

@@ -48,9 +48,9 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @q =  params[:q]
+    @q = params[:q]
     search = Product.search do
-      fulltext @q
+      fulltext params[:q]
     end
     @products = search.results
   end
