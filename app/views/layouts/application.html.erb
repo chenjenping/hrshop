@@ -2,27 +2,56 @@
 <html>
 <head>
   <title>hrshop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.2/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="container">
-<% if notice %>
-  <div id="notice" style="z-index: 400;">
-    <p class="notice"><%= notice %></p>
-  </div>
-<% end %>
+  <nav class="nav has-shadow">
+    <div class="container">
+      <div class="nav-left">
+        <a class="nav-item is-tab<%= @active_tab[:products] %>" href="<%= products_url %>">
+          <span class="icon is-small">
+            <i class="fa fa-cubes"></i>
+          </span>
+          <span>商品</span>
+        </a>
+        <a class="nav-item is-tab<%= @active_tab[:orders] %>" href="<%= orders_url %>">
+          <span class="icon is-small">
+            <i class="fa fa-list"></i>
+          </span>
+          <span>訂單</span>
+        </a>
+      </div>
+    </div>
+<!-- 
+    <span class="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+ -->
+  </nav>
+  <div id="main">
+    <div class="container">
+    <% if notice %>
+      <div id="notice" style="z-index: 400;">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
 
-<% if alert %>
-  <div id="notice" style="z-index: 400;">
-    <p class="alert"><%= alert %></p>
-  </div>
-<% end %>
+    <% if alert %>
+      <div id="notice" style="z-index: 400;">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
 
-  <div class="content">
-    <%= yield %>
+      <div class="content">
+        <%= yield %>
+      </div>
+    </div>
   </div>
-</div>
 </body>
 </html>

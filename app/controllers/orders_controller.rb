@@ -44,6 +44,10 @@ class OrdersController < ApplicationController
 
 private
 
+  def set_active_tab
+    @active_tab = { :products => '', :orders => ' is-active' }
+  end
+
   def order_params
     params.require(:order).permit(:purchaser, :phone, :email, :address)
   end

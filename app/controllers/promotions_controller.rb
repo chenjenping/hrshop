@@ -14,7 +14,7 @@ class PromotionsController < ApplicationController
     @product_id = product.id
     promotion = product.current_promotion
     @promotion = Promotion.new(promotion_params)
-    if promotion.amount == @promotion.amount && promotion.discount == @promotion.discount
+    if promotion && promotion.amount == @promotion.amount && promotion.discount == @promotion.discount
       redirect_to products_url and return
     end
 
@@ -27,6 +27,10 @@ class PromotionsController < ApplicationController
   end
 
 private
+
+  def set_active_tab
+    @active_tab = { :products => ' is-active', :orders => '' }
+  end
 
   def promotion_params
     params.require(:promotion).permit(:amount, :discount)

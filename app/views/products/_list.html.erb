@@ -1,11 +1,11 @@
-<table>
+<table class="table is-bordered">
   <thead>
     <tr>
-      <th></th>
-      <th>名稱</th>
-      <th>價格</th>
-      <th>介紹</th>
-      <th>優惠</th>
+      <th width="20%"></th>
+      <th width="15%">名稱</th>
+      <th width="10%">價格</th>
+      <th width="25%">介紹</th>
+      <th width="30%">優惠</th>
     </tr>
   </thead>
   <tbody>
@@ -15,13 +15,15 @@
       <% if product.is_on_shelf? %>
         <%= link_to '下架', product_path(product),
                            method: :delete,
-                           data: { confirm: '確定下架？' } %>
+                           data: { confirm: '確定下架？' },
+                           class: 'button is-danger' %>
       <% else %>
         <%= link_to '上架', on_shelf_product_path(product),
                            method: :put,
-                           data: { confirm: '確定上架？' } %>
+                           data: { confirm: '確定上架？' },
+                           class: 'button is-danger' %>
       <% end %>
-        <%= link_to edit_product_path(product) do %>
+        <%= link_to edit_product_path(product), class: 'button is-light' do %>
           編輯
         <% end %>
       </td>
@@ -40,7 +42,9 @@
           買 <%= product.current_promotion.amount %> 件以上每件可折扣 <%= product.current_promotion.discount %> 元
         </p>
       <% end %>
-        <%= link_to '調整優惠', new_product_promotion_path(product) %>
+        <p>
+          <%= link_to '調整優惠', new_product_promotion_path(product), class: 'button is-warning' %>
+        </p>
       </td>
     </tr>
   <% end %>

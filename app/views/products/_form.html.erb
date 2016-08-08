@@ -1,38 +1,39 @@
-<div class="row">
-  <div class="col-md-offset-4 col-md-4">
+<div class="columns">
+  <div class="column is-one-third is-offset-one-third">
+    <%= link_to '回商品列表', products_path, class: 'button is-warning' %>
     <%= form_for @product, :url => @product.new_record? ? products_path : product_path(@product), :html => { :id => 'new_product_form', :multipart => true } do |f| %>
-      <%= link_to '回商品列表', products_path, :class => 'expanded' %>
-      <h4 class="text-center">
+      <h2 class="text-center">
         <%= action %>商品
-      </h4>
-      <div>
-        <%= f.label :name, '名稱' %>
-        <%= f.text_field :name %>
-      </div>
-      <div>
-        <%= f.label :price, '價格' %>
-        <%= f.text_field :price %>
-      </div>
-      <div>
-        <%= f.label :description, '介紹' %>
-        <%= f.text_area :description %>
-      </div>
-      <p>
-        <%= f.submit action, :class => 'button expanded form_button' %>
-      </p>
-      <% if @product.errors.any? %>
-        <div id="error">
-          <h4>
-            <%= pluralize(@product.errors.count, 'error') %>
-            prohibited this product from being saved:
-          </h4>
+      </h2>
+    <% if @product.errors.any? %>
+      <article id="error" class="message is-danger">
+        <div class="message-header">
+          請修正這些欄位
+        </div>
+        <div class="message-body content">
           <ul>
-            <% @product.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
+          <% @product.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
           </ul>
         </div>
-      <% end %>
+      </article>
+    <% end %>
+      <%= f.label :name, '名稱', class: 'label' %>
+      <p class="control">
+        <%= f.text_field :name, class: 'input' %>
+      </p>
+      <%= f.label :price, '價格', class: 'label' %>
+      <p class="control">
+        <%= f.text_field :price, class: 'input' %>
+      </p>
+      <%= f.label :description, '介紹', class: 'label' %>
+      <p class="control">
+        <%= f.text_area :description, class: 'textarea' %>
+      </p>
+      <p>
+        <%= f.submit action, class: 'button is-success' %>
+      </p>
     <% end %>
   </div>
 </div>

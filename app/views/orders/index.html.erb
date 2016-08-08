@@ -1,15 +1,15 @@
 <h1>訂單</h1>
 
-<%= link_to '新增訂單', new_order_path, { class: 'button form_button' } %>
-<table>
+<%= link_to '新增訂單', new_order_path, class: 'button is-success' %>
+<table id="order_table" class="table is-bordered">
   <thead>
     <tr>
-      <th>客戶姓名</th>
-      <th>電話</th>
-      <th>email</th>
-      <th>地址</th>
-      <th>消費額</th>
-      <th>內容</th>
+      <th width="15%">客戶姓名</th>
+      <th width="15%">電話</th>
+      <th width="15%">email</th>
+      <th width="25%">地址</th>
+      <th width="10%">消費額</th>
+      <th width="20%">內容</th>
     </tr>
   </thead>
   <tbody>

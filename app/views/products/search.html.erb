@@ -1,36 +1,39 @@
-<%= link_to '取消', new_order_url %>
-<h1>搜尋訂單商品</h1>
-<table>
-  <thead>
-    <tr>
-      <th>名稱</th>
-      <th>價格</th>
-      <th>介紹</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @products.each do |product| %>
-    <tr>
-      <td>
-        <%= product.name %>
-      </td>
-      <td>
-        <%= product.price %>
-      </td>
-      <td>
-        <%= product.description %>
-      </td>
-      <td>
-        <%= form_tag add_to_order_product_path(product) do %>
-          <div>
-            <%= label_tag :amount, '數量' %>
-            <%= text_field_tag :amount %>
-            <%= submit_tag '加入訂單' %>
-          </div>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <%= link_to '回上頁', new_order_url, class: 'button is-warning' %>
+    <h1>搜尋訂單商品包含 "<%= @q %>"</h1>
+    <table id="search_table" class="table is-bordered">
+      <thead>
+        <tr>
+          <th width="20%">名稱</th>
+          <th width="10%">價格</th>
+          <th width="30%">介紹</th>
+          <th width="40%"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td>
+            <%= product.name %>
+          </td>
+          <td>
+            <%= product.price %>
+          </td>
+          <td>
+            <%= product.description %>
+          </td>
+          <td>
+            <%= form_tag add_to_order_product_path(product) do %>
+              <div class="control has-addons">
+                <%= text_field_tag :amount, nil, { class: 'input is-expanded',  placeholder: '數量' } %>
+                <%= submit_tag '加入訂單', class: 'button is-success' %>
+              </div>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

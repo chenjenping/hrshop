@@ -1,62 +1,73 @@
-<div class="row">
-  <div class="col-md-offset-4 col-md-4">
-    <%= link_to '回訂單列表', orders_path, :class => 'expanded' %>
+<div class="columns">
+  <div class="column is-one-third is-offset-one-third">
+    <%= link_to '回訂單列表', orders_path, :class => 'button is-warning' %>
     <%= form_tag search_products_path do %>
-      <div>
-        <%= label_tag :q, '搜尋商品' %>
-        <%= text_field_tag :q %>
-        <%= submit_tag '搜尋' %>
+      <h2>
+        搜尋商品
+      </h2>
+      <div class="control has-addons">
+        <%= text_field_tag :q, nil, class: 'input is-expanded' %>
+        <button class="button is-success">
+          <span class="icon">
+            <i class="fa fa-search"></i>
+          </span>
+        </button>
       </div>
     <% end %>
     <%= form_for @order, :url => @order.new_record? ? orders_path : order_path(@order), :html => { :id => 'new_order_form' } do |f| %>
-      <h4 class="text-center">
+      <h2 class="text-center">
         <%= action %>訂單
-      </h4>
+      </h2>
+    <% if @order.errors.any? %>
+      <article id="error" class="message is-danger">
+        <div class="message-header">
+          請修正這些欄位
+        </div>
+        <div class="message-body content">
+          <ul>
+          <% @order.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      </article>
+    <% end %>
+    <% if @items.count == 0 %>
+      <article id="error" class="message is-danger">
+        <div class="message-body content">
+          請在上方搜尋商品加入訂單
+        </div>
+      </article>
+    <% else %>
       <%= link_to '清空訂單商品', clear_cart_orders_path(),
                                 method: :post,
-                                data: { confirm: '確定清空？' } %>
-      <% if @items.count == 0 %>
-        <p>請在上方搜尋商品加入訂單</p>
-      <% end %>
+                                data: { confirm: '確定清空？' },
+                                class: 'button is-danger' %>
+    <% end %>
       <ul>
       <% @items.each do |item| %>
         <li><%= item['product'] %> x <%= item['amount'] %></li>
       <% end %>
       </ul>
-      <div>
-        <%= f.label :purchaser, '客戶姓名' %>
-        <%= f.text_field :purchaser %>
-      </div>
-      <div>
-        <%= f.label :phone, '電話' %>
-        <%= f.text_field :phone %>
-      </div>
-      <div>
-        <%= f.label :email %>
-        <%= f.text_field :email %>
-      </div>
-      <div>
-        <%= f.label :address, '地址' %>
-        <%= f.text_field :address %>
-      </div>
-      <p>
-        <%= f.submit action, :class => 'button expanded form_button' %>
+      <p class="control">
+        <%= f.label :purchaser, '客戶姓名', class: 'label' %>
+        <%= f.text_field :purchaser, class: 'input' %>
       </p>
-      <% if @order.errors.any? || @items.count == 0 %>
-        <div id="error">
-          <h4>
-            請修正這些欄位
-          </h4>
-          <ul>
-            <% if @items.count == 0 %>
-              <li>請搜尋商品加入訂單</li>
-            <% end %>
-            <% @order.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      <p class="control">
+        <%= f.label :phone, '電話', class: 'label' %>
+        <%= f.text_field :phone, class: 'input' %>
+      </p>
+      <p class="control">
+        <%= f.label :email, 'Email', class: 'label' %>
+        <%= f.text_field :email, class: 'input' %>
+      </p>
+      <p class="control">
+        <%= f.label :address, '地址', class: 'label' %>
+        <%= f.text_field :address, class: 'input' %>
+      </p>
+      <p>
+        <%= f.submit action, class: 'button is-success' %>
+      </p>
     <% end %>
   </div>
 </div>

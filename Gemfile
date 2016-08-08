@@ -45,6 +45,7 @@ gem 'eventmachine', '1.0.9'
 gem "paranoia", "~> 2.0"
 gem 'sunspot_rails'
 gem 'sunspot_solr'
+gem 'progress_bar'
 
 # group :development do
   # gem 'guard-livereload'

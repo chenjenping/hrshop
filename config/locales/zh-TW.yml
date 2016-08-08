@@ -9,6 +9,9 @@ zh-TW:
         purchaser: 客戶姓名
         phone: 電話
         address: 地址
+      promotion:
+        amount: 件數
+        discount: 折扣
   date:
     abbr_day_names:
     - 周日

@@ -1,21 +1,42 @@
-<%= link_to '取消', products_url %>
-<%= form_for @promotion, :url => product_promotions_path(@product_id), :html => { :id => 'new_promotion_form' } do |f| %>
-  <div>
-    買 <%= f.text_field :amount %> 件以上每件可折扣 <%= f.text_field :discount %> 元
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <%= link_to '回商品列表', products_url, class: 'button is-warning' %>
+    <%= form_for @promotion, :url => product_promotions_path(@product_id), :html => { :id => 'new_promotion_form' } do |f| %>
+      <h2>調整優惠</h2>
+    <% if @promotion.errors.any? %>
+      <article id="error" class="message is-danger">
+        <div class="message-header">
+          請修正這些欄位
+        </div>
+        <div class="message-body content">
+          <ul>
+          <% @promotion.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      </article>
+    <% end %>
+      <div class="control is-horizontal">
+        <div class="control-label">
+          <label class="label">買</label>
+        </div>
+        <div class="control">
+          <%= f.text_field :amount, class: 'input' %>
+        </div>
+        <div class="control-label">
+          <label class="label">件以上每件可折扣</label>
+        </div>
+        <div class="control">
+          <%= f.text_field :discount, class: 'input' %>
+        </div>
+        <div class="control-label">
+          <label class="label">元</label>
+        </div>
+      </div>
+      <div>
+        <%= f.submit '儲存', class: 'button is-success' %>
+      </div>
+    <% end %>
   </div>
-  <div>
-    <%= f.submit '儲存', :class => 'button expanded form_button' %>
-  </div>
-  <% if @promotion.errors.any? %>
-    <div id="error">
-      <h4>
-        請修正這些欄位
-      </h4>
-      <ul>
-        <% @promotion.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-<% end %>
+</div>

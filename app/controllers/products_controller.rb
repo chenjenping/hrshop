@@ -42,13 +42,15 @@ class ProductsController < ApplicationController
   def on_shelf
     product = Product.with_deleted.find(params[:id])
     product.restore
+    product.atomic_update deleted_at: nil
    
     redirect_to products_url
   end
 
   def search
+    @q =  params[:q]
     search = Product.search do
-      fulltext params[:q]
+      fulltext @q
     end
     @products = search.results
   end
@@ -65,6 +67,10 @@ class ProductsController < ApplicationController
 
 private
 
+  def set_active_tab
+    @active_tab = { :products => ' is-active', :orders => '' }
+  end
+
   def product_params
     params.require(:product).permit(:name, :price, :description)
   end
@@ -72,7 +78,7 @@ private
   def is_in_cart?(id)
     items = session[:items]
     items.each do |item|
-      if (item['product_id'] == id)
+      if (item['product_id'] == id.to_i)
         return true
       end
     end
